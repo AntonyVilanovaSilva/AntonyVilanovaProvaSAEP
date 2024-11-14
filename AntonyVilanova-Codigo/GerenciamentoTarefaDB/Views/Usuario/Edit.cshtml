@@ -1,0 +1,121 @@
+﻿@model GerenciamentoTarefaDB.Models.Usuario
+
+@{
+    ViewBag.Title = "Detalhes do Usuário";
+}
+
+<h2>Detalhes do Usuário</h2>
+
+<style>
+    /* Estilos para a página de detalhes do usuário */
+    .details-container {
+        max-width: 600px;
+        margin: auto;
+        padding: 20px;
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+        .details-container h4 {
+            color: #343a40;
+            margin-bottom: 20px;
+        }
+
+    .dl-horizontal dt {
+        font-weight: bold;
+        color: #495057;
+    }
+
+    .dl-horizontal dd {
+        color: #212529;
+        margin-bottom: 10px;
+    }
+
+    /* Estilos para os botões */
+    .action-buttons {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .btn-custom {
+        display: inline-flex;
+        align-items: center;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+        text-decoration: none;
+    }
+
+        .btn-custom i {
+            margin-right: 8px;
+        }
+
+        .btn-custom:hover {
+            background-color: #0056b3;
+        }
+
+    /* Estilo para o botão Voltar */
+    .btn-back {
+        display: inline-flex;
+        align-items: center;
+        padding: 10px 20px;
+        background-color: #6c757d; /* Cor cinza */
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+        text-decoration: none;
+    }
+
+        .btn-back i {
+            margin-right: 8px;
+        }
+
+        .btn-back:hover {
+            background-color: #5a6268; /* Cor cinza mais escuro */
+        }
+</style>
+
+<div class="details-container">
+    <h4>Informações do Usuário</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+    </dl>
+</div>
+
+<div class="action-buttons">
+    <!-- Botão Editar com ícone -->
+    <a href="@Url.Action("Edit", "Usuario", new { id = Model.IDUsuario })" class="btn-custom">
+        <i class="fas fa-edit"></i> Editar
+    </a>
+
+    <!-- Botão Voltar com ícone e cor cinza -->
+    <a href="@Url.Action("Index", "Usuario")" class="btn-back">
+        <i class="fas fa-arrow-left"></i> Voltar para a Lista
+    </a>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script> <!-- FontAwesome para ícones -->
+}

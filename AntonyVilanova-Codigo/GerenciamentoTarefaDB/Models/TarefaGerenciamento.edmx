@@ -1,0 +1,295 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="GerenciamentoTarefaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Prioridade">
+          <Key>
+            <PropertyRef Name="IdPrioridade" />
+          </Key>
+          <Property Name="IdPrioridade" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descricao" Type="varchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StatusTarefa">
+          <Key>
+            <PropertyRef Name="IdStatus" />
+          </Key>
+          <Property Name="IdStatus" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descricao" Type="varchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Tarefa">
+          <Key>
+            <PropertyRef Name="IDTarefa" />
+          </Key>
+          <Property Name="IDTarefa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descricao" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="NomeSetor" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="DataCadastro" Type="datetime" Nullable="false" />
+          <Property Name="IdStatus" Type="int" />
+          <Property Name="IdUsuario" Type="int" />
+          <Property Name="IdPrioridade" Type="int" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="IDUsuario" />
+          </Key>
+          <Property Name="IDUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_PrioridadeTarefa">
+          <End Role="Prioridade" Type="Self.Prioridade" Multiplicity="0..1" />
+          <End Role="Tarefa" Type="Self.Tarefa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prioridade">
+              <PropertyRef Name="IdPrioridade" />
+            </Principal>
+            <Dependent Role="Tarefa">
+              <PropertyRef Name="IdPrioridade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StatusTarefa">
+          <End Role="StatusTarefa" Type="Self.StatusTarefa" Multiplicity="0..1" />
+          <End Role="Tarefa" Type="Self.Tarefa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusTarefa">
+              <PropertyRef Name="IdStatus" />
+            </Principal>
+            <Dependent Role="Tarefa">
+              <PropertyRef Name="IdStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuarioTarefa">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Tarefa" Type="Self.Tarefa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IDUsuario" />
+            </Principal>
+            <Dependent Role="Tarefa">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GerenciamentoTarefaDBModelStoreContainer">
+          <EntitySet Name="Prioridade" EntityType="Self.Prioridade" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StatusTarefa" EntityType="Self.StatusTarefa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tarefa" EntityType="Self.Tarefa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_PrioridadeTarefa" Association="Self.FK_PrioridadeTarefa">
+            <End Role="Prioridade" EntitySet="Prioridade" />
+            <End Role="Tarefa" EntitySet="Tarefa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StatusTarefa" Association="Self.FK_StatusTarefa">
+            <End Role="StatusTarefa" EntitySet="StatusTarefa" />
+            <End Role="Tarefa" EntitySet="Tarefa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuarioTarefa" Association="Self.FK_UsuarioTarefa">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Tarefa" EntitySet="Tarefa" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GerenciamentoTarefaDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Prioridade">
+          <Key>
+            <PropertyRef Name="IdPrioridade" />
+          </Key>
+          <Property Name="IdPrioridade" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descricao" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Tarefa" Relationship="Self.FK_PrioridadeTarefa" FromRole="Prioridade" ToRole="Tarefa" />
+        </EntityType>
+        <EntityType Name="StatusTarefa">
+          <Key>
+            <PropertyRef Name="IdStatus" />
+          </Key>
+          <Property Name="IdStatus" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descricao" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Tarefa" Relationship="Self.FK_StatusTarefa" FromRole="StatusTarefa" ToRole="Tarefa" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Tarefa">
+          <Key>
+            <PropertyRef Name="IDTarefa" />
+          </Key>
+          <Property Name="IDTarefa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descricao" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NomeSetor" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DataCadastro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IdStatus" Type="Int32" />
+          <Property Name="IdUsuario" Type="Int32" />
+          <Property Name="IdPrioridade" Type="Int32" />
+          <NavigationProperty Name="Prioridade" Relationship="Self.FK_PrioridadeTarefa" FromRole="Tarefa" ToRole="Prioridade" />
+          <NavigationProperty Name="StatusTarefa" Relationship="Self.FK_StatusTarefa" FromRole="Tarefa" ToRole="StatusTarefa" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_UsuarioTarefa" FromRole="Tarefa" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="IDUsuario" />
+          </Key>
+          <Property Name="IDUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Tarefa" Relationship="Self.FK_UsuarioTarefa" FromRole="Usuario" ToRole="Tarefa" />
+        </EntityType>
+        <Association Name="FK_PrioridadeTarefa">
+          <End Role="Prioridade" Type="Self.Prioridade" Multiplicity="0..1" />
+          <End Role="Tarefa" Type="Self.Tarefa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prioridade">
+              <PropertyRef Name="IdPrioridade" />
+            </Principal>
+            <Dependent Role="Tarefa">
+              <PropertyRef Name="IdPrioridade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StatusTarefa">
+          <End Role="StatusTarefa" Type="Self.StatusTarefa" Multiplicity="0..1" />
+          <End Role="Tarefa" Type="Self.Tarefa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusTarefa">
+              <PropertyRef Name="IdStatus" />
+            </Principal>
+            <Dependent Role="Tarefa">
+              <PropertyRef Name="IdStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuarioTarefa">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Tarefa" Type="Self.Tarefa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IDUsuario" />
+            </Principal>
+            <Dependent Role="Tarefa">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GerenciamentoTarefaDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Prioridade" EntityType="Self.Prioridade" />
+          <EntitySet Name="StatusTarefa" EntityType="Self.StatusTarefa" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Tarefa" EntityType="Self.Tarefa" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <AssociationSet Name="FK_PrioridadeTarefa" Association="Self.FK_PrioridadeTarefa">
+            <End Role="Prioridade" EntitySet="Prioridade" />
+            <End Role="Tarefa" EntitySet="Tarefa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StatusTarefa" Association="Self.FK_StatusTarefa">
+            <End Role="StatusTarefa" EntitySet="StatusTarefa" />
+            <End Role="Tarefa" EntitySet="Tarefa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuarioTarefa" Association="Self.FK_UsuarioTarefa">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Tarefa" EntitySet="Tarefa" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GerenciamentoTarefaDBModelStoreContainer" CdmEntityContainer="GerenciamentoTarefaDBEntities">
+          <EntitySetMapping Name="Prioridade">
+            <EntityTypeMapping TypeName="GerenciamentoTarefaDBModel.Prioridade">
+              <MappingFragment StoreEntitySet="Prioridade">
+                <ScalarProperty Name="IdPrioridade" ColumnName="IdPrioridade" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StatusTarefa">
+            <EntityTypeMapping TypeName="GerenciamentoTarefaDBModel.StatusTarefa">
+              <MappingFragment StoreEntitySet="StatusTarefa">
+                <ScalarProperty Name="IdStatus" ColumnName="IdStatus" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="GerenciamentoTarefaDBModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tarefa">
+            <EntityTypeMapping TypeName="GerenciamentoTarefaDBModel.Tarefa">
+              <MappingFragment StoreEntitySet="Tarefa">
+                <ScalarProperty Name="IDTarefa" ColumnName="IDTarefa" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="NomeSetor" ColumnName="NomeSetor" />
+                <ScalarProperty Name="DataCadastro" ColumnName="DataCadastro" />
+                <ScalarProperty Name="IdStatus" ColumnName="IdStatus" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdPrioridade" ColumnName="IdPrioridade" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="GerenciamentoTarefaDBModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="IDUsuario" ColumnName="IDUsuario" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

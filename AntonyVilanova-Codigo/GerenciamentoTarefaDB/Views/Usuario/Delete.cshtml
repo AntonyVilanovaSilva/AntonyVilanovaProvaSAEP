@@ -1,0 +1,114 @@
+﻿@model GerenciamentoTarefaDB.Models.Usuario
+
+@{
+    ViewBag.Title = "Excluir Usuário";
+}
+
+<h2>Excluir Usuário</h2>
+
+<style>
+    /* Estilos para a página de exclusão de usuário */
+    .confirmation-container {
+        max-width: 600px;
+        margin: auto;
+        padding: 20px;
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+        .confirmation-container h3 {
+            color: #dc3545;
+            font-weight: bold;
+        }
+
+        .confirmation-container h4 {
+            color: #343a40;
+            margin-bottom: 20px;
+        }
+
+    .dl-horizontal dt {
+        font-weight: bold;
+        color: #495057;
+    }
+
+    .dl-horizontal dd {
+        color: #212529;
+        margin-bottom: 10px;
+    }
+
+    .form-actions {
+        margin-top: 20px;
+    }
+
+    .btn-delete {
+        background-color: #dc3545;
+        color: #fff;
+        padding: 8px 20px;
+        font-weight: bold;
+        border-radius: 5px;
+        border: none;
+        transition: background-color 0.3s ease;
+        margin-right: 10px;
+    }
+
+        .btn-delete:hover {
+            background-color: #c82333;
+        }
+
+    /* Estilo para o botão Voltar */
+    .btn-back {
+        display: inline-flex;
+        align-items: center;
+        padding: 8px 20px;
+        background-color: #6c757d; /* Cor cinza */
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+        text-decoration: none;
+    }
+
+        .btn-back i {
+            margin-right: 8px;
+        }
+
+        .btn-back:hover {
+            background-color: #5a6268; /* Cor cinza mais escuro */
+        }
+</style>
+
+<div class="confirmation-container">
+    <h3>Tem certeza de que deseja excluir este usuário?</h3>
+    <div>
+        <h4>Informações do Usuário</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Nome)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Nome)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions">
+                <input type="submit" value="Excluir" class="btn-delete" />
+                @Html.ActionLink("Voltar para a Lista", "Index", null, new { @class = "btn-back" })
+            </div>
+        }
+    </div>
+</div>

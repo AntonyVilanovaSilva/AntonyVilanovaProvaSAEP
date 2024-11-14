@@ -1,0 +1,105 @@
+﻿@model IEnumerable<GerenciamentoTarefaDB.Models.Usuario>
+
+@{
+    ViewBag.Title = "Lista de Usuários";
+}
+
+<h2>Lista de Usuários</h2>
+
+<style>
+    /* Estilos para a tabela de usuários */
+    .table {
+        width: 100%;
+        max-width: 800px;
+        margin: auto;
+        background-color: #ffffff;
+        border-collapse: collapse;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+        .table th, .table td {
+            padding: 12px;
+            text-align: left;
+            border-top: 1px solid #dee2e6;
+        }
+
+        .table th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+            color: #495057;
+        }
+
+        .table td {
+            color: #212529;
+        }
+
+        .table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+    .action-link {
+        color: #007bff;
+        font-weight: bold;
+        text-decoration: none;
+        margin-right: 8px;
+        transition: color 0.3s ease;
+    }
+
+        .action-link:hover {
+            color: #0056b3;
+        }
+
+    .btn-create {
+        display: inline-block;
+        margin-bottom: 15px;
+        padding: 8px 16px;
+        font-weight: bold;
+        color: #fff;
+        background-color: #28a745;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-create:hover {
+            background-color: #218838;
+        }
+</style>
+
+<p>
+    @Html.ActionLink("Novo Usuário", "Create", null, new { @class = "btn-create" })
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Email)
+        </th>
+        <th>Ações</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.IDUsuario }, new { @class = "action-link" }) |
+                @Html.ActionLink("Detalhes", "Details", new { id = item.IDUsuario }, new { @class = "action-link" }) |
+                @Html.ActionLink("Deletar", "Delete", new { id = item.IDUsuario }, new { @class = "action-link" })
+            </td>
+        </tr>
+    }
+
+</table>
+
